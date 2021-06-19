@@ -12,47 +12,136 @@ const oldPointStructure = {
   10: ['Q', 'Z']
 };
 
-function oldScrabbleScorer(word) {
-	word = word.toUpperCase();
-	let letterPoints = "";
- 
+function oldScrabbleScorer(wordToScore) {
+  word = word.toUpperCase();
+	let letterPoints = 0
+
 	for (let i = 0; i < word.length; i++) {
  
 	  for (const pointValue in oldPointStructure) {
  
 		 if (oldPointStructure[pointValue].includes(word[i])) {
-			letterPoints += `Points for '${word[i]}': ${pointValue}\n`
+      letterPoints = letterPoints += Number(pointValue)
+
 		 }
+    
  
 	  }
 	}
-	return letterPoints;
+	return console.log(`Score for ${word}: ${letterPoints}`);
  }
 
-// your job is to finish writing these functions and variables that we've named //
 // don't change the names or your program won't work as expected. //
+let word = ""
 
 function initialPrompt() {
-   console.log("Let's play some scrabble! Enter a word:");
+   word = input.question("Let's play some scrabble! \nEnter a word to score: ");
+   return word;
 };
 
-let simpleScore;
+// console.log(oldScrabbleScorer(initialPrompt()))
 
-let vowelBonusScore;
+function simpleScore(wordToScore){
+  word = word.toUpperCase();
+	score = 0
+	  for (let i = 0; i < word.length; i++) {
+      score++
+    }
+	return console.log(`Score for ${word}: ${score}`);
+ }
 
-let scrabbleScore;
+// console.log(simpleScore())
 
-const scoringAlgorithms = [];
+function vowelBonusScore(wordToScore){
+  word = word.toUpperCase();
+  letterPoints = 0
+  let vowelBonusPoints= ['A', 'E', 'I', 'O', 'U']
+  
+    for (let i = 0; i < word.length; i++) {
+  if(vowelBonusPoints.includes(word[i])){
+    letterPoints+=3
+  }
+  else{
+    letterPoints+=1
+  }
 
-function scorerPrompt() {}
+    }
+      return console.log(`Score of ${word}: ${letterPoints}`)
 
-function transform() {};
+}
 
-let newPointStructure;
+// console.log(vowelBonusScore())
 
+function scrabbleScore(wordToScore){
+  word = word.toUpperCase();
+  letterPoints = 0
+  for (let i = 0; i < word.length; i++){
+    if ((word[i]) in newPointStructure) {
+console.log(newPointStructure [i])
+      // letterPoints = letterPoints += Number(pointValue)
+  }
+  }
+  return console.log(`Score for ${word}: ${letterPoints}`);
+}
+
+const scoringAlgorithms = [
+ {
+  name: 'Simple Score',
+  description: 'Each letter is worth 1 point.',
+  scoreFunction:'A function with a parameter for user input that returns a score.'
+},
+{
+  name: 'Bonus Vowels',
+  description: 'Vowels are 3 pts, consonants are 1 pt.',
+  scoreFunction:'A function that returns a score based on the number of vowels and consonants.'
+},
+{
+  name: 'Scrabble',
+  description: 'The traditional scoring algorithm.',
+  scoreFunction:'Uses the oldScrabbleScorer() function to determine the score for a given word.'
+}
+];
+
+
+function scorerPrompt() {
+  console.log("Which scoring algorithm would you like to use?");
+  console.log('0 - Simple:', scoringAlgorithms[0].description);
+  console.log('1 - Vowel Bonus:', scoringAlgorithms[1].description);
+  console.log('2 - Scrabble:', scoringAlgorithms[2].description);
+  selectedScoringAlgorithm = input.question("Enter 0, 1, or 2: ");
+// while (selectedScoringAlgorithm != `0`||`1`||`2`)
+    if (selectedScoringAlgorithm === `0`){
+      return console.log(simpleScore());
+    }
+    if (selectedScoringAlgorithm === `1`){
+      return console.log(vowelBonusScore());
+    }
+    if (selectedScoringAlgorithm === `2`){
+      return console.log(scrabbleScore());
+    }
+    else {
+      selectedScoringAlgorithm = input.question(`Please enter the number 0, 1, or 2 to selsect a scoring algorithm.`)
+    }
+}
+
+function transform(oldPointStructure) {
+let newPointStructure ={}
+for (let letters in oldPointStructure){
+  for(let i = 0; i < oldPointStructure[letters].length; i++){
+  newPointStructure[oldPointStructure[letters][i]]= Number(letters)
+  }
+}
+return newPointStructure
+};
+
+
+let newPointStructure =
+transform(oldPointStructure)
+
+// console.log(newPointStructure.A)
 function runProgram() {
    initialPrompt();
-   
+   scorerPrompt();
 }
 
 // Don't write any code below this line //
