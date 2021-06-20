@@ -77,8 +77,9 @@ function scrabbleScore(wordToScore){
   letterPoints = 0
   for (let i = 0; i < word.length; i++){
     if ((word[i]) in newPointStructure) {
-console.log(newPointStructure [i])
-      // letterPoints = letterPoints += Number(pointValue)
+// console.log(newPointStructure[word[i]])
+letterPoints = newPointStructure[word[i]] += letterPoints
+
   }
   }
   return console.log(`Score for ${word}: ${letterPoints}`);
