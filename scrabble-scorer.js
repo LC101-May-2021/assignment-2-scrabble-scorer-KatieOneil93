@@ -139,7 +139,7 @@ return newPointStructure
 let newPointStructure =
 transform(oldPointStructure)
 
-console.log(newPointStructure)
+// console.log(newPointStructure)
 function runProgram() {
    initialPrompt();
    scorerPrompt();
