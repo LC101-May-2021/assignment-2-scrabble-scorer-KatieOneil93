@@ -77,8 +77,8 @@ function scrabbleScore(wordToScore){
   letterPoints = 0
   for (let i = 0; i < word.length; i++){
     if ((word[i]) in newPointStructure) {
-// console.log(newPointStructure[word[i]])
-letterPoints = newPointStructure[word[i]] += letterPoints
+//  console.log(newPointStructure[word[i]])
+letterPoints += newPointStructure[word[i]] 
 
   }
   }
@@ -99,7 +99,7 @@ const scoringAlgorithms = [
 {
   name: 'Scrabble',
   description: 'The traditional scoring algorithm.',
-  scoreFunction:'Uses the oldScrabbleScorer() function to determine the score for a given word.'
+  scoreFunction:'Uses scrabble point system.'
 }
 ];
 
@@ -139,7 +139,7 @@ return newPointStructure
 let newPointStructure =
 transform(oldPointStructure)
 
-// console.log(newPointStructure.A)
+console.log(newPointStructure)
 function runProgram() {
    initialPrompt();
    scorerPrompt();
